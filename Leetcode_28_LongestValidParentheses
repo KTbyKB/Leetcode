@@ -1,0 +1,28 @@
+#28 LongestValidParentheses
+    def longestValidParentheses(self, s: str) -> int:
+        left = 0
+        right = 0
+        mx = 0
+        for i in s:
+            if i == '(':
+                left += 1
+            else:
+                right += 1
+            if left == right:
+                mx = max(mx, left*2)
+            elif right > left:
+                left = 0
+                right = 0
+        left = 0
+        right = 0
+        for i in s[::-1]:
+            if i == '(':
+                left += 1
+            else:
+                right += 1
+            if left == right:
+                mx = max(mx, left*2)
+            elif left > right:
+                left = 0
+                right = 0
+        return mx
