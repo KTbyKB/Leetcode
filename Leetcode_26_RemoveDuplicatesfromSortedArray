@@ -1,0 +1,5 @@
+#26. Remove Duplicates from Sorted Array
+    def removeDuplicates(self, nums):
+        s = sorted(set(nums))
+        nums[0:] = s       
+        return (len(s))
