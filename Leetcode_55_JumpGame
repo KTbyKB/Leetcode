@@ -1,0 +1,8 @@
+#55. Jump Game
+  def canJump(self, nums: List[int]) -> bool:
+        ptr = 0
+        for i, x in enumerate(nums):
+            if i > ptr :
+                return False
+            ptr = max(ptr, i+x)
+        return True
