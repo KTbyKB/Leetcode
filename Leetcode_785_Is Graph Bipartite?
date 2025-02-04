@@ -1,0 +1,21 @@
+#785. Is Graph Bipartite?
+
+    def isBipartite(self, graph: List[List[int]]) -> bool:
+              
+        color = [0]*len(graph)
+        for i in range(len(graph)):
+            if color[i] != 0:
+                continue
+            queue = collections.deque()
+            queue.append(i) 
+            color[i] = 1
+
+            while queue:
+                node = queue.popleft()
+                for ele in graph[node]:
+                    if color[ele] == 0:
+                        color[ele] = -1 * color[node]
+                        queue.append(ele)
+                    elif color[ele] == color[node]:
+                        return False
+        return True
