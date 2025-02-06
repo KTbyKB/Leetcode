@@ -1,0 +1,20 @@
+#1726. Tuple with Same Product
+
+def tupleSameProduct(self, nums: List[int]) -> int:
+    n = len(nums)
+    d = dict()
+
+    for i in range(n):
+        for j in range(i+1, n):
+            p = nums[i] * nums[j]
+            if p not in d:
+                d[p] = 1
+            else:
+                d[p] += 1
+    print(d)
+    ans = 0
+    for k in d.keys():
+        x = d[k]
+        ans += 8* x * (x-1)//2
+
+    return ans 
