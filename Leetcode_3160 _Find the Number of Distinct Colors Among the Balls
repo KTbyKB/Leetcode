@@ -1,0 +1,17 @@
+#3160  Find the Number of Distinct Colors Among the Balls
+def queryResults(self, limit: int, queries: List[List[int]]) -> List[int]:
+    ans = []
+    color = {}
+    cnt = collections.Counter()
+
+    for b, c in queries:
+        if b in color:
+            prev = color[b]
+            cnt[prev] -= 1
+            if cnt[prev] == 0:
+                del cnt[prev]
+        color[b] = c
+        cnt[c] += 1
+        ans.append(len(cnt))
+
+    return ans 
