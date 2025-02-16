@@ -1,0 +1,40 @@
+#1718. Construct the Lexicographically Largest Valid Sequence
+
+    def constructDistancedSequence(self, n: int) -> List[int]:
+        def sequence(i):
+            if i == size:
+                return True
+            if arr[i] != 0:
+                return sequence(i + 1)
+            else:
+                for num in range(n, 0, -1):
+                    if num == 1:
+                        if num not in visited:
+                            arr[i] = 1
+                            visited.add(num)
+
+                            if sequence(i + 1):
+                                return True
+
+                            arr[i] = 0
+                            visited.remove(num)
+                    else:
+                        if num not in visited and i + num < size and arr[i+num] == 0:
+                            arr[i] = num
+                            arr[i + num] = num
+                            visited.add(num)
+
+                            if sequence(i + 1):
+                                return True
+                            
+                            arr[i] = 0
+                            arr[i + num] = 0
+                            visited.remove(num)
+            return False
+
+        visited = set()
+        size = n*2 -1
+        arr = [0] * size
+        sequence(0)
+
+        return arr
