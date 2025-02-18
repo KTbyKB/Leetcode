@@ -1,0 +1,18 @@
+# 383. Ransom Note
+
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        d = collections.defaultdict()
+
+        for ch in magazine:
+            if ch not in d:
+                d[ch] = 1
+            else:
+                d[ch] += 1
+        
+        for cr in ransomNote:
+            if cr not in d or d[cr] == 0:
+                return False
+            else:
+                d[cr] -= 1
+        
+        return True
