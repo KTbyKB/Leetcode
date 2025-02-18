@@ -1,0 +1,12 @@
+# 128. Longest Consecutive Sequence
+
+    def longestConsecutive(self, nums: List[int]) -> int:
+        seq_cnt = 0
+        arr = set(nums)
+        for i in arr:
+            if i-1 not in arr:
+                length = 0
+                while i + length in arr:
+                    length += 1
+                seq_cnt = max(seq_cnt, length)
+        return seq_cnt
