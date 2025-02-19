@@ -1,0 +1,32 @@
+1415. The k-th Lexicographical String of All Happy Strings of Length n
+
+def getHappyString(self, n: int, k: int) -> str:
+        queue = collections.deque()
+        res = []
+        queue.append('a')
+        queue.append('b')
+        queue.append('c')
+
+        while queue:
+            ele = queue.popleft()
+            if len(ele) == n:
+                res.append(ele)
+                continue
+            
+            first = ele
+            sec = ele
+            if ele[-1] == 'a':
+                first += 'b'
+                sec += 'c'
+            elif ele[-1] == 'b':
+                first += 'a'
+                sec += 'c'
+            elif ele[-1] == 'c':
+                first += 'a'
+                sec += 'b'
+            queue.append(first)
+            queue.append(sec)
+        
+        if len(res) < k:
+            return ''
+        return res[k-1]
