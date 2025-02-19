@@ -1,0 +1,26 @@
+# 36. Valid Sudoku
+
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        row = collections.defaultdict(list)
+        col = collections.defaultdict(list)
+        square = collections.defaultdict(list)
+
+        for i in range(9):
+            for j in range(9):
+                if board[i][j] != '.':
+                    row[i].append(board[i][j])
+                    col[j].append(board[i][j])
+                    square[(i//3, j//3)].append(board[i][j])
+        
+        for k, v in row.items():
+            if len(v) != len(set(v)):
+                return False
+       
+        for k, v in col.items():
+            if len(v) != len(set(v)):
+                return False
+        
+        for k, v in square.items():
+            if len(v) != len(set(v)):
+                return False
+        
