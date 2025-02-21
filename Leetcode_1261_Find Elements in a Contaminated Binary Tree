@@ -1,0 +1,15 @@
+# 1261. Find Elements in a Contaminated Binary Tree
+
+    def __init__(self, root: Optional[TreeNode]):
+        self.ele = set()
+        self.dfs(root, 0)
+    
+    def dfs(self, root, val):
+        if root == None:
+            return
+        self.ele.add(val)
+        self.dfs(root.left, 2*val + 1)
+        self.dfs(root.right, 2*val + 2)        
+
+    def find(self, target: int) -> bool:
+        return target in self.ele
