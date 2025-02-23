@@ -1,0 +1,15 @@
+57. Insert Interval - Medium
+
+    def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
+        
+        intervals.append(newInterval) 
+        arr = sorted(intervals)
+
+        res = []
+        for ele in arr:
+            if not res or res[-1][-1] < ele[0]:
+                res.append(ele)
+            else:
+                res[-1][-1] = max(ele[1], res[-1][-1])
+        
+        return res
