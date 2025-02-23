@@ -1,0 +1,13 @@
+452. Minimum Number of Arrows to Burst Balloons
+
+    def findMinArrowShots(self, points: List[List[int]]) -> int:
+        points = sorted(points, key = lambda x : x[1])
+        cnt = 0
+        terminate = float("-inf")
+
+        for ptr in points:
+            if ptr[0] > terminate:
+                cnt += 1
+                terminate = ptr[1]
+        
+        return cnt     
