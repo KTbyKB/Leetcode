@@ -1,0 +1,9 @@
+1749. Maximum Absolute Sum of Any Subarray
+
+    def maxAbsoluteSum(self, nums: List[int]) -> int:
+        
+        pre_sum = [0]
+        for ele in nums:
+            pre_sum.append(pre_sum[-1] + ele)
+            
+        return max(pre_sum) - min(pre_sum)
