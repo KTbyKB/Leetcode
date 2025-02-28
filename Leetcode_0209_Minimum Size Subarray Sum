@@ -1,0 +1,23 @@
+209. Minimum Size Subarray Sum
+
+class Solution:
+    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+        minwindow = float('inf')
+        currentsum = 0
+
+        low = 0
+        high = 0
+
+        while high < len(nums):
+            currentsum += nums[high]
+            high += 1
+
+            while currentsum >= target:
+                currentwindow = high - low
+                minwindow = min(minwindow, currentwindow)
+                currentsum -= nums[low]
+                low += 1
+
+        if minwindow == float('inf'):
+            return 0
+        return minwindow
