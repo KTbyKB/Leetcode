@@ -1,0 +1,17 @@
+643. Maximum Average Subarray I
+
+    def findMaxAverage(self, nums: List[int], k: int) -> float:
+        if k == 1:
+            return max(nums)
+        left = 0 
+        right = k
+        tot = sum(nums[left:right])
+        mxsum = tot
+        while right < len(nums):
+            tot -= nums[left]
+            tot += nums[right]
+            left += 1
+            right += 1
+            mxsum = max(mxsum, tot)
+
+        return mxsum /k 
