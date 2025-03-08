@@ -1,0 +1,15 @@
+2379. Minimum Recolors to Get K Consecutive Black Blocks
+
+    def minimumRecolors(self, blocks: str, k: int) -> int:
+        cur_cnt = blocks[:k].count('W')
+        mn = cur_cnt
+        left = 0
+        for right in range(k, len(blocks)):
+            if blocks[left] == 'W':
+                cur_cnt -= 1
+            left += 1
+            if blocks[right] == 'W':
+                cur_cnt += 1
+            mn = min(mn, cur_cnt)
+
+        return mn       
