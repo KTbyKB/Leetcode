@@ -1,0 +1,14 @@
+94. Binary Tree Inorder Traversal
+
+    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        def dfs(root):
+            if root is None:
+                return
+            dfs(root.left)
+            res.append(root.val)
+            dfs(root.right)
+        
+        res = []
+        dfs(root)
+        
+        return res 
