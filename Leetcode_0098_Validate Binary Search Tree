@@ -1,0 +1,15 @@
+98. Validate Binary Search Tree
+
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        def dfs(root):
+            if root is None:
+                return
+            dfs(root.left)
+            res.append(root.val)
+            dfs(root.right)
+        
+        res = []
+        dfs(root)
+        if len(res) != len(set(res)):
+            return False
+        return res == sorted(res)
