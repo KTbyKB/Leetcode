@@ -1,0 +1,32 @@
+1679. Max Number of K-Sum Pairs
+
+# Using Two pointers
+
+        nums.sort()
+        cnt = 0
+        left = 0
+        right = len(nums) - 1
+        while left < right:
+            tot = nums[left] + nums[right]
+            if tot == k:
+                cnt += 1
+                left += 1
+                right -= 1
+            elif tot > k:
+                right -= 1
+            else:
+                left += 1
+        return cnt
+
+# Using Dictionary
+
+    def maxOperations(self, nums: List[int], k: int) -> int:
+        d = collections.defaultdict(int)
+        cnt = 0
+        for ele in nums:
+            if d[k - ele] > 0:
+                cnt += 1
+                d[k - ele] -= 1
+            else:
+                d[ele] += 1
+        return cnt
