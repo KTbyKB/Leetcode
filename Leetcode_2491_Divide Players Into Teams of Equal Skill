@@ -1,0 +1,19 @@
+2491. Divide Players Into Teams of Equal Skill
+
+    def dividePlayers(self, skill: List[int]) -> int:
+
+        skill.sort()
+        tar = skill[0] + skill [-1]
+        p1 = 0
+        p2 = len(skill) - 1
+        res = 0
+
+        while p1 < p2:
+            if skill[p1] + skill[p2] == tar:
+                res += skill[p1] * skill[p2]
+                p1 += 1
+                p2 -= 1
+            else:
+                return -1
+
+        return res
