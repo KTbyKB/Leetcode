@@ -1,0 +1,4 @@
+453 Minimum Moves to Equal Array Elements
+
+    def minMoves(self, nums: List[int]) -> int:
+        return sum(nums) - min(nums) * len(nums)
