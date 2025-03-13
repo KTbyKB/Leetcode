@@ -1,0 +1,26 @@
+3356. Zero Array Transformation II
+
+    def minZeroArray(self, nums: List[int], queries: List[List[int]]) -> int:
+        n = len(nums)
+        pre_arr = [0] * (n + 1)
+        tot = 0
+        pos = 0
+
+        for i in range(n):
+            while tot + pre_arr[i] < nums[i]:
+                if pos == len(queries):
+                    return -1
+
+                left = queries[pos][0]
+                right = queries[pos][1] 
+                k = queries[pos][2]
+                pos += 1
+
+                if right < i:
+                    continue
+
+                pre_arr[max(left, i)] += k
+                pre_arr[right + 1] -= k
+            tot += pre_arr[i]   
+        
+        return pos
