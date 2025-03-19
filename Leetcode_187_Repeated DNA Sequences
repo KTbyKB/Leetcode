@@ -1,0 +1,13 @@
+187. Repeated DNA Sequences
+
+    def findRepeatedDnaSequences(self, s: str) -> List[str]:
+        d = collections.defaultdict(int)
+        res = []
+
+        for i in range(len(s)-10+1):
+            ele = s[i:i+10]
+            d[ele] += 1
+            if d[ele] == 2:
+                res.append(ele)
+        
+        return res   
