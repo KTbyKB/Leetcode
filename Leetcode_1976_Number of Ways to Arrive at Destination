@@ -1,0 +1,29 @@
+1976. Number of Ways to Arrive at Destination
+
+    def countPaths(self, n: int, roads: List[List[int]]) -> int:
+        adj_list = defaultdict(list)
+
+        for u, v, w in roads:
+            adj_list[u].append((v, w))
+            adj_list[v].append((u, w))
+
+        time = [float('inf')] * n
+        time[0] = 0
+
+        paths = [0] * n
+        paths[0] = 1
+
+        q = [(0, 0)]
+
+        while q:
+            dur, u = heappop(q)
+            for v, w in adj_list[u]:
+                upd = dur + w
+                if upd < time[v]:
+                    heappush(q, (upd, v))
+                    time[v] = upd
+                    paths[v] = paths[u]
+                elif upd == time[v]:
+                    paths[v] += paths[u]
+        
+        return paths[-1] % (10 ** 9 + 7)
