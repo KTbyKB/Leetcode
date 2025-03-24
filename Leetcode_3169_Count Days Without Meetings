@@ -1,0 +1,14 @@
+3169. Count Days Without Meetings
+
+    def countDays(self, days: int, meetings: List[List[int]]) -> int:
+        meetings.sort()
+
+        res = 0
+        prev = 0
+        for start, end in meetings:
+            if prev < start:
+                res += start - prev - 1
+            prev = max(prev, end)
+        res += days - prev
+
+        return res
