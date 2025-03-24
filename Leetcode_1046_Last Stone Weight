@@ -1,0 +1,17 @@
+1046. Last Stone Weight
+
+    def lastStoneWeight(self, stones: List[int]) -> int:
+        heap = []
+        for stone in stones:
+            heapq.heappush(heap, -stone)
+        print(heap)
+        while len(heap) >= 2:
+            e1 = -heapq.heappop(heap)
+            e2 = -heapq.heappop(heap)
+            if e1 != e2:
+                heapq.heappush(heap, -(e1-e2))
+            print(heap)
+        if heap:
+            return -heapq.heappop(heap)
+        else:
+            return 0
