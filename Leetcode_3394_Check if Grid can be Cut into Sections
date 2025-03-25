@@ -1,0 +1,32 @@
+3394. Check if Grid can be Cut into Sections
+
+    def checkValidCuts(self, n: int, rectangles: List[List[int]]) -> bool:
+        xrec = []
+        yrec = []
+
+        for sx, sy, ex, ey in rectangles:
+            xrec.append([sx, ex])
+            yrec.append([sy, ey])
+        
+        xrec.sort()
+        yrec.sort()
+  
+        yres = []
+        for ys, ye in yrec:
+            if not yres or yres[-1][-1] <= ys:
+                yres.append([ys, ye])
+            else:
+                yres[-1][-1] = max(ye, yres[-1][-1])
+        if len(yres) > 2:
+            return True 
+        xres = []
+        for xs, xe in xrec:
+            if not xres or xres[-1][-1] <= xs:
+                xres.append([xs, xe])
+            else:
+                xres[-1][-1] = max(xe, xres[-1][-1])
+           
+        if len(xres) > 2:
+            return True 
+    
+        return False
