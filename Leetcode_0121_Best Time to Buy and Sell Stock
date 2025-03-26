@@ -1,0 +1,12 @@
+121. Best Time to Buy and Sell Stock
+
+    def maxProfit(self, prices: List[int]) -> int:
+        buy = float('inf')
+        sell = 0
+        for price in prices:
+            if buy > price:
+                buy = price
+            if sell < (price - buy):
+                sell = price - buy
+
+        return sell
