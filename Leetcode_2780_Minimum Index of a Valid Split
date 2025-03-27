@@ -1,0 +1,12 @@
+2780. Minimum Index of a Valid Split
+
+     def minimumIndex(self, nums: List[int]) -> int:
+        cnt_left = collections.Counter()
+        cnt_right = collections.Counter(nums)
+        
+        for i, num in enumerate(nums):
+            cnt_left[num] += 1
+            cnt_right[num] -= 1
+            if cnt_left[num] * 2 > i + 1 and cnt_right[num] * 2 > len(nums) - i - 1:
+                return i
+        return -1 
