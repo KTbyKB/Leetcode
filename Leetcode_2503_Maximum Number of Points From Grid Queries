@@ -1,0 +1,27 @@
+2503. Maximum Number of Points From Grid Queries
+
+class Solution:
+    def maxPoints(self, grid: List[List[int]], queries: List[int]) -> List[int]:
+
+        nr = len(grid)
+        nc = len(grid[0])
+
+        qs = sorted((v, i) for i, v in enumerate(queries))
+
+        res = [0] * len(qs)
+        q = [(grid[0][0], 0, 0)]
+        points = 0
+        visited = [[False] * nc for _ in range(nr)]
+        visited[0][0] = True
+
+        for ele, idx in qs:
+            while q and q[0][0] < ele:
+                val, i, j = heappop(q)
+                points += 1
+                for row, col in [[i+1, j], [i-1, j], [i, j+1], [i, j-1]]:
+                    if 0 <= row < nr and 0 <= col < nc and not visited[row][col]:
+                        heappush(q, (grid[row][col], row, col))
+                        visited[row][col] = True
+            res[idx] = points
+            
+        return res
