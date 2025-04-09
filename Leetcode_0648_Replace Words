@@ -1,0 +1,45 @@
+648. Replace Words
+
+class Node:
+    def __init__(self):
+        self.children = {}
+        self.word_end = False
+
+class Trie:
+    def __init__(self):
+        self.root = Node()
+
+    def insert(self, word):
+        current_node = self.root
+
+        for ch in word:
+            if ch not in current_node.children:
+                current_node.children[ch] = Node()
+            current_node = current_node.children[ch]
+        current_node.word_end = True
+    
+    def search(self, word):
+        current_node = self.root
+        repword = ''
+        for ch in word:
+            if ch in current_node.children:
+                repword += ch
+                current_node = current_node.children[ch]
+                if current_node.word_end:
+                    return repword
+            else:
+                return word
+        return word
+
+class Solution:
+    def replaceWords(self, dictionary: List[str], sentence: str) -> str:
+        trie = Trie()
+
+        for word in dictionary:
+            trie.insert(word)
+        
+        words = sentence.split(' ')
+        for i, word in enumerate(words):
+            words[i] = trie.search(word)
+        
+        return ' '.join(words)
