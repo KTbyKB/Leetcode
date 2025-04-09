@@ -1,0 +1,25 @@
+79. Word Search
+
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+
+        def dfs(board, i, j, word, pos):
+            if pos >= len(word):
+                return True
+            if i < 0 or i >= nr or j < 0 or j >= nc or board[i][j] != word[pos]:
+                return False
+            temp = board[i][j]
+            board[i][j] = '*'
+            if dfs(board, i, j+1, word, pos + 1) or dfs(board, i, j-1, word, pos + 1) or dfs(board, i+1, j, word, pos + 1) or dfs(board, i-1, j, word, pos + 1):
+                return True
+            board[i][j] = temp
+            return False
+
+        nr = len(board)
+        nc = len(board[0])
+
+        for i in range(nr):
+            for j in range(nc):
+                if word[0] == board[i][j] and dfs(board, i, j, word, 0):
+                    return True
+        return False
