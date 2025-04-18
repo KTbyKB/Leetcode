@@ -1,0 +1,38 @@
+5. Longest Palindromic Substring
+
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        n = len(s)
+        dp = [[0]*n for _ in range(n)]
+
+        mx = 1
+        start = 0
+        end = 0
+
+        for i in range(n):
+            dp[i][i] = 1
+
+            if i+1 < n:
+                if s[i] == s[i+1]:
+                    dp[i][i+1] = 2
+                    mx = 2
+                    start = i
+                    end = i+1
+                else:
+                    dp[i][i+1] = 0
+        
+        for d in range(2, n):
+            for i in range(n):
+                tar = d + i
+                if tar > n-1:
+                    break
+                if s[i] == s[tar] and dp[i+1][tar-1] > 0:
+                    dp[i][tar] = dp[i+1][tar-1] + 2
+                    if (tar - i + 1) > mx:
+                        mx = tar -i + 1
+                        start = i
+                        end = tar
+                else:
+                    dp[i][tar] = 0
+
+        return s[start : end + 1]
