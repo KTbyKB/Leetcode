@@ -1,0 +1,22 @@
+2563. Count the Number of Fair Pairs
+
+class Solution:
+    def countFairPairs(self, nums: List[int], lower: int, upper: int) -> int:
+        def bin_search(low, high, target):
+            while low <= high:
+                m = (low + high) // 2
+                if nums[m] >= target:
+                    high = m - 1
+                else:
+                    low = m + 1
+            return high
+
+        nums.sort()
+        n = len(nums)
+        res = 0
+        for i in range(n):
+            left = lower - nums[i]
+            right = upper - nums[i]
+            res += bin_search(i+1, n-1, right + 1 ) - bin_search(i+1, n - 1, left)
+        
+        return res
