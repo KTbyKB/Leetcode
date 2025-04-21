@@ -1,0 +1,12 @@
+2145. Count the Hidden Sequences
+
+class Solution:
+    def numberOfArrays(self, differences: List[int], lower: int, upper: int) -> int:
+        mx = 0
+        mn = 0
+        tot = 0
+        for diff in differences:
+            tot += diff
+            mx = max(mx, tot)
+            mn = min(mn, tot)
+        return max(0, upper - mx + mn - lower +1)
