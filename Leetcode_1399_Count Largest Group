@@ -1,0 +1,19 @@
+1399. Count Largest Group
+
+class Solution:
+    def countLargestGroup(self, n: int) -> int:
+        if n < 10:
+            arr = list(range(1, n+1))
+        else:
+            arr = list(range(1, 10))
+        cnt = Counter(arr)
+        for i in range(10, n+1):
+            num = list(str(i))
+            tot = 0
+            for digit in num:
+                tot += int(digit)
+            cnt[tot] += 1
+        val = list(cnt.values())
+        mx = max(val)
+        
+        return val.count(mx)
