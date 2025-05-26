@@ -1,5 +1,5 @@
 # 228. Summary Ranges
-
+ 
     def summaryRanges(self, nums: List[int]) -> List[str]:
         res = []
         n = len(nums)
