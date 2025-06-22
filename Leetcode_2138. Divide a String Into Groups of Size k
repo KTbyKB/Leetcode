@@ -1,0 +1,13 @@
+2138. Divide a String Into Groups of Size k
+
+class Solution:
+    def divideString(self, s: str, k: int, fill: str) -> List[str]:
+        n = len(s)
+        p = 0
+        if n%k != 0:
+            p = k - (n % k)
+            s = s + fill * p
+        res = []
+        for i in range(len(s)//k):
+            res.append(s[i*k: i*k+k])
+        return res
