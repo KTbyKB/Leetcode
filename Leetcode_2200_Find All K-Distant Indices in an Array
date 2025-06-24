@@ -1,0 +1,14 @@
+2200. Find All K-Distant Indices in an Array
+
+class Solution:
+    def findKDistantIndices(self, nums: List[int], key: int, k: int) -> List[int]:
+        n =  len(nums)
+        res = []
+
+        for i in range(n):
+            for j in range(n):
+                if abs(i - j) <= k and nums[j] == key and i not in res:
+                    res.append(i)
+                    break
+        
+        return res
